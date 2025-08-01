@@ -1,7 +1,21 @@
+import java.util.Properties
+import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
 }
+
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        load(FileInputStream(file))
+    }
+}
+
+val cloudName: String = localProperties.getProperty("CLOUDINARY_CLOUD_NAME") ?: ""
+val apiKey: String = localProperties.getProperty("CLOUDINARY_API_KEY") ?: ""
+val apiSecret: String = localProperties.getProperty("CLOUDINARY_API_SECRET") ?: ""
+
 
 android {
     namespace = "com.example.addabuzz"
@@ -15,6 +29,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "CLOUDINARY_CLOUD_NAME", "\"$cloudName\"")
+        buildConfigField("String", "CLOUDINARY_API_KEY", "\"$apiKey\"")
+        buildConfigField("String", "CLOUDINARY_API_SECRET", "\"$apiSecret\"")
+    }
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -46,4 +67,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.cloudinary:cloudinary-android:2.3.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
 }

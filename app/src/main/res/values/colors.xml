@@ -2,4 +2,35 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+        <!-- Primary colors -->
+        <color name="colorPrimary">#6200EE</color>
+        <color name="colorPrimaryDark">#3700B3</color>
+        <color name="colorPrimaryLight">#9E47FF</color>
+
+        <!-- Secondary/accent color -->
+        <color name="colorAccent">#03DAC5</color>
+
+        <!-- Text colors -->
+        <color name="textPrimary">#212121</color>
+        <color name="textSecondary">#757575</color>
+
+        <!-- Background colors -->
+        <color name="background">#FFFFFF</color>
+
+        <!-- Error colors -->
+        <color name="error">#FF0000</color>
+
+        <!-- Other UI colors -->
+        <color name="divider">#BDBDBD</color>
+
+
+        <!-- Button states -->
+        <color name="button_pressed">#3700B3</color>
+        <color name="button_normal">#6200EE</color>
+
+
+        <color name="gray_text">#757575</color>
+        <color name="red_error">#FF0000</color>
+
 </resources>
