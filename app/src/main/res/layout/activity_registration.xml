@@ -8,6 +8,16 @@
     android:background="@color/background"
     tools:context=".registration">
 
+
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/regiCircularProgressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:indicatorSize="48dp"
+        app:trackThickness="4dp"
+        tools:ignore="MissingConstraints" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,6 +1,7 @@
 package com.example.addabuzz;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,6 +29,8 @@ public class login extends AppCompatActivity {
     Button button;
     FirebaseAuth auth;
     String emailPattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$";
+    android.app.ProgressDialog progressDialog;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,12 +48,17 @@ public class login extends AppCompatActivity {
         email = findViewById(R.id.editTextEmail);
         pass = findViewById(R.id.editTextPassword);
         button = findViewById(R.id.loginButton);
+        CircularProgressIndicator progressIndicator = findViewById(R.id.circularProgressIndicator);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait.");
+        progressDialog.setCancelable(false);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String Email= email.getText().toString();
                 String password = pass.getText().toString();
+
 
                 if((Email.isEmpty())){
                     Toast.makeText(login.this, "Please Enater Email.", Toast.LENGTH_LONG).show();
@@ -62,6 +71,8 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                progressDialog.show();
+                                progressIndicator.setVisibility(View.VISIBLE);
                                 try {
                                     Intent intent = new Intent(login.this, MainActivity.class);
                                     startActivity(intent);

@@ -21,6 +21,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.example.addabuzz.util.CloudinaryConfig;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +58,7 @@ public class registration extends AppCompatActivity {
         rgConfirmPassword = findViewById(R.id.rgConfirmPassword);
         rgButton = findViewById(R.id.btnRegister);
         rgProfile = findViewById(R.id.rgProfile);
+        CircularProgressIndicator progressIndicator = findViewById(R.id.regiCircularProgressIndicator);
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -119,6 +121,7 @@ public class registration extends AppCompatActivity {
                         String imageUrl = (String) uploadResult.get("secure_url");
 
                         runOnUiThread(() -> {
+                            progressIndicator.setVisibility(View.VISIBLE);
                             progressDialog.setMessage("Registering user...");
 
                             auth.createUserWithEmailAndPassword(userEmail, userPassword)

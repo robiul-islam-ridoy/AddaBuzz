@@ -3,6 +3,10 @@ package com.example.addabuzz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +15,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class splash extends AppCompatActivity {
+    ImageView logo;
+    TextView appName, authorName;
+
+    Animation topAnimation, bottomAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,17 @@ public class splash extends AppCompatActivity {
             return insets;
         });
 
+        logo = findViewById(R.id.logo);
+        appName = findViewById(R.id.textViewName);
+        authorName = findViewById(R.id.textViewAuthorName);
+
+        topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        topAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+
+        logo.setAnimation(topAnimation);
+        appName.setAnimation(topAnimation);
+        authorName.setAnimation(topAnimation);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -30,6 +49,6 @@ public class splash extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 1000);
     }
 }
